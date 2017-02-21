@@ -1,0 +1,63 @@
+operations on DB:
+
+========create db================
+create database acos;
+
+========delete db================
+drop database acos;
+
+
+CREATE DATABASE IF NOT EXISTS cats DEFAULT CHARSET utf8 COLLATE utf8_general_ci
+
+//grant all privileges on dbname.* to username@localhost identified by 'password';
+grant all privileges on acos.* to acos@'localhost' identified by 'acos';
+grant all privileges on acos.* to root@'%' identified by 'root';
+
+insert into user(version, create_time, creator_id, email_addr, last_modify_time, login_time, name, passwd, role, status, user_name, org_id) values (1, 0, 0, "jeany_feng@sohu.com", 0, 0, "Feng Yaxiang", "123456", 2, 0, "z001w79n", 0); 
+
+insert into user(version, create_time, creator_id, email_addr, last_modify_time, login_time, name, passwd, role, status, user_name, org_id) values (1, 0, 0, "xujun_rabbit@126.com", 0, 0, "Xu Jun", "123456", 2, 0, "xjun", 0); 
+
+insert into user(version, create_time, creator_id, email_addr, last_modify_time, login_time, name, passwd, role, status, user_name, org_id) values (1, 0, 0, "11988091@qq.com", 0, 0, "Liu Qi", "123456", 2, 0, "qliu", 0); 
+
+insert into user(version, create_time, creator_id, email_addr, last_modify_time, login_time, name, passwd, role, status, user_name, org_id) values (1, 0, 0, "guest@qq.com", 0, 0, "Guest", "guest", 2, 0, "guest", 0); 
+
+
+insert into test_space(version, create_time, creator_id, from_id, last_modify_time, owner_id, name) values (1, 0, 3, 0,0, 3,"7100"); 
+update user set role = 1 where id=97
+delete from release_def where id
+update test_engine set ip_addr = '172.29.215.107' where id=34
+select * from test_case where name='fyx_webgui'
+update test_engine set ip_addr = '172.29.215.94' where id=36
+
+alter table a drop column b,c
+DROP TABLE table_name;
+
+import data to DB
+use cats
+source ***.sql
+
+
+
+
+======sync db with prod env.==============
+
+1)start DB on VM:
+service mysqld start
+
+2)在你的server上 my DB server 172.29.22.162 root/C0riant@SH
+1.	登录172.29.14.157 (密码Cori@nt01)，在shell命令行下输入：
+mysqldump -uroot -p --database cats > xxx.sql  （xxx随意命名, 157cats数据库密码C@tsmore01 ）
+然后输入cats数据库密码
+2.	登录你的数据库server，在shell命令下输入 （先把xxx.sql传到你的server，因为太大可能要压缩，然后在sql文件所在目录下输入下面命令）
+mysql -uroot -p cats < xxx.sql      （数据库密码C@tstest01）
+然后输入cats数据库密码
+3.	接着在shell环境下mysql -u root –p，然后
+Enter password:
+#use cats
+#update task set status = 0;
+
+
+
+
+
+
